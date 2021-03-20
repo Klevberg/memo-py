@@ -1,0 +1,4 @@
+__pycache__/
+
+packs/*
+!packs/example.json
