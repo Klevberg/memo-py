@@ -1,12 +1,33 @@
 from card import Card
 from quiz import Quiz
+
+import os.path
+
 import json
 
-file_name = input("Which file do you want to use? (example.json) ")
-file = "packs/" + file_name if file_name else "packs/example.json"
 
-with open(file, encoding='utf8') as file:
-    data = json.load(file)
+while True:
+
+    file_name = input("Which file do you want to use? (example.json) ")
+    file = "packs/" + file_name if file_name else "packs/example.json"
+
+    if not os.path.isfile(file):
+        print(f"Error: The file {file} does not exist.")
+        continue
+    
+    if file.endswith(".json"):
+        file_type = "json"
+    else:
+        print("Error: Must be a json file.")
+        continue
+
+    try:
+        with open(file, encoding='utf8') as file:
+            data = json.load(file)
+        break
+    except IOError:
+        print("Error: Something went wrong when trying to open the file.")
+
 
 card_objects = []
 
